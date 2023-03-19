@@ -14,8 +14,8 @@ class m230319_112511_create_menu_table extends Migration
     {
         $this->createTable('{{%menu}}', [
             'id' => $this->primaryKey(),
-            'dish_id' => $this->integer(),
-            'price' => $this->double()
+            'dish_id' => $this->integer()->notNull(),
+            'price' => $this->decimal(10, 2)->notNull()
         ]);
 
         $this->addForeignKey(

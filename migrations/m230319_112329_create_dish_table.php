@@ -14,7 +14,7 @@ class m230319_112329_create_dish_table extends Migration
     {
         $this->createTable('{{%dish}}', [
             'id' => $this->primaryKey(),
-            'name' => $this->string(),
+            'name' => $this->string()->notNull(),
             'description' => $this->string()
         ]);
     }

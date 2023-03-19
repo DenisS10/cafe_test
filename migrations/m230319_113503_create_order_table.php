@@ -14,19 +14,10 @@ class m230319_113503_create_order_table extends Migration
     {
         $this->createTable('{{%order}}', [
             'id' => $this->primaryKey(),
-            'menu_id' => $this->integer(),
-            'amount' => $this->double(),
+            'amount' => $this->decimal(10, 2)->notNull(),
             'table_number' => $this->integer(),
             'description' => $this->string(),
         ]);
-
-        $this->addForeignKey(
-            'order_menu_id_menu_t_id_fkey',
-            '{{%order}}',
-            'menu_id',
-            '{{%menu}}',
-            'id'
-        );
     }
 
     /**
