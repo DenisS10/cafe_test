@@ -2,15 +2,21 @@
 
 namespace app\modules\api\controllers;
 
+use ApiBaseController;
 use app\models\MenuOrder;
 use app\models\Order;
-use yii\web\Controller;
 use yii\web\Response;
 
 
-class OrderController extends Controller
+class OrderController extends ApiBaseController
 {
-    public function actionCreate()
+    public function behaviors(): array
+    {
+//        return array_merge(parent::behaviors(), 'auth behaviour');
+        return parent::behaviors();
+    }
+
+    public function actionCreate(): null|Order
     {
         $this->enableCsrfValidation = false;
         $order = new Order();
@@ -20,17 +26,23 @@ class OrderController extends Controller
             $this->response->setStatusCode(201);
             return $order;
         }
+        return null;
     }
 
-    public function actionAddPosition()
+    public function actionAddPosition(): MenuOrder|bool
     {
         return MenuOrder::addPosition();
     }
 
-    public function actionRemovePosition()
+    public function actionRemovePosition(): void
     {
         if(MenuOrder::removePosition()) {
             $this->response->setStatusCode(200);
         }
+    }
+
+    public function actionCloseOrder()
+    {
+        // to be continued...  I didn't see this in task :)
     }
 }
